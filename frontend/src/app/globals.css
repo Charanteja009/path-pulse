@@ -1,0 +1,129 @@
+@import "tailwindcss";
+
+/* 🎨 THEME CONFIGURATION */
+@theme {
+  --color-brand-cyan: #06b6d4;
+  --color-zinc-950: #09090b;
+  --radius-premium: 2rem;
+}
+
+:root {
+  --bg-dark: #050505;
+  --bg-light: #ffffff;
+  --accent-emerald: #10b981;
+  --grid-line-light: rgba(0, 0, 0, 0.04);
+  --grid-line-dark: rgba(16, 185, 129, 0.08);
+}
+
+/* 🏗️ BASE RESET */
+body {
+  background-color: var(--bg-dark); /* Defaulting to Dark for Execution */
+  color: #fff;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+/* 🌀 ANIMATION KEYFRAMES */
+@keyframes gridMove {
+  0% { background-position: 0 0; }
+  100% { background-position: 40px 40px; }
+}
+
+@keyframes gridSlowMove {
+  0% { background-position: 0 0; }
+  100% { background-position: 50px 50px; }
+}
+
+@keyframes float {
+  0% { transform: translate(0, 0) rotate(0deg); }
+  50% { transform: translate(50px, 100px) rotate(180deg); }
+  100% { transform: translate(0, 0) rotate(360deg); }
+}
+
+@keyframes pulseScan {
+  0% { transform: translateY(-100%); opacity: 0; }
+  50% { opacity: 0.5; }
+  100% { transform: translateY(100vh); opacity: 0; }
+}
+
+@keyframes progressFlow {
+  0% { background-position: 0 0; }
+  100% { background-position: 100% 0; }
+}
+
+/* 🛰️ BACKGROUND CLASSES */
+
+/* The "Dark Execution" Background */
+.moving-grid {
+  position: fixed;
+  inset: 0;
+  background-size: 40px 40px;
+  background-image: 
+    linear-gradient(to right, var(--grid-line-dark) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--grid-line-dark) 1px, transparent 1px);
+  animation: gridMove 4s linear infinite;
+  z-index: -1;
+}
+
+.scanlines {
+  position: fixed;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    transparent 50%,
+    rgba(0, 0, 0, 0.3) 51%,
+    transparent 100%
+  );
+  background-size: 100% 4px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* The "White Blueprint" Background */
+.moving-blueprint {
+  position: fixed;
+  inset: 0;
+  background-color: var(--bg-light);
+  background-image: 
+    linear-gradient(to right, var(--grid-line-light) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--grid-line-light) 1px, transparent 1px);
+  background-size: 50px 50px;
+  animation: gridSlowMove 15s linear infinite;
+  z-index: -1;
+}
+
+/* The "Sensor Scan" (Architectural Line) */
+.sensor-scan {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 100px;
+  background: linear-gradient(to bottom, transparent, rgba(16, 185, 129, 0.05), transparent);
+  animation: pulseScan 8s ease-in-out infinite;
+  z-index: -1;
+}
+
+/* 💠 UTILITIES & GLASSMORPISM */
+@layer utilities {
+  .emerald-glow {
+    box-shadow: 0 0 30px -5px var(--accent-emerald);
+  }
+
+  .glass-hud {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(20px) saturate(180%);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .animated-progress {
+    background: linear-gradient(90deg, #10b981 0%, #34d399 50%, #10b981 100%);
+    background-size: 200% 100%;
+    animation: progressFlow 2s linear infinite;
+  }
+
+  .neo-shadow {
+    box-shadow: 10px 10px 0px 0px rgba(0, 0, 0, 1);
+  }
+}

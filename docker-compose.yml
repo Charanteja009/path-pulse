@@ -1,0 +1,66 @@
+services:
+  # --- DATABASES ---
+  postgres-db:
+    image: postgres:15
+    environment:
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: ${DB_AUTH_NAME}
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${DB_USER} -d ${DB_AUTH_NAME}"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  mongo-db:
+    image: mongo:latest
+    ports:
+      - "27017:27017"
+
+  rabbitmq:
+    image: rabbitmq:3-management
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+
+  redis:
+    image: redis:alpine
+    ports:
+      - "6379:6379"
+
+  # --- MICROSERVICES ---
+  auth-service:
+    build: ./services/auth-service
+    ports:
+      - "3001:3001" # Exposing this helps us debug if the gateway fails
+    env_file: .env
+    depends_on:
+      postgres-db:
+        condition: service_healthy
+
+  roadmap-service:
+    build: ./services/roadmap-service
+    env_file: .env
+    depends_on:
+      - mongo-db
+
+  repo-service:
+    build: ./services/repo-service
+    env_file: .env
+
+  ai-service:
+    build: ./services/ai-service
+    env_file: .env
+
+  # --- THE FRONT DOOR ---
+  api-gateway:
+    build: ./api-gateway
+    ports:
+      - "80:80"
+    depends_on:
+      - auth-service
+      - roadmap-service
+      - repo-service
+      - ai-service

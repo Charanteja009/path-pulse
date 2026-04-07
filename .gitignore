@@ -1,0 +1,8 @@
+# This will catch .env, .env.local, .env.dev in ANY subfolder
+**/.env*
+
+# Also ignore your Python virtual environments and Node modules everywhere
+**/node_modules/
+**/venv/
+**/__pycache__/
+**/checkpoints.db
