@@ -1,5 +1,4 @@
 "use client";
-
 import React, { useState, useEffect, useRef } from 'react';
 import Navbar from '../components/Navbar';
 import { Send, Terminal, Code2, History, ChevronRight, GitBranch, Loader2, Plus } from 'lucide-react';

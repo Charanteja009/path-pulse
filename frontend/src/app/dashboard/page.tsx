@@ -55,7 +55,7 @@ export default function Dashboard() {
             </motion.div>
           </Link>
 
-          <Link href="/repo-explainer">
+          <Link href="/explainer" prefetch={false}>
             <motion.div 
               whileHover={{ y: -5 }}
               className="group p-8 rounded-[2.5rem] bg-zinc-900 text-white shadow-sm hover:shadow-2xl transition-all cursor-pointer"
