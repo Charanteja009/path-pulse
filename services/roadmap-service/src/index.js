@@ -4,10 +4,10 @@ const roadmapRoutes = require('./routes/roadmapRoutes');
 
 const cors = require('cors'); 
 const app = express();
-const PORT = 3002;
+const PORT = 5001;
 
 app.use(cors({
-  origin: 'http://localhost:3000',
+  origin: 'http://localhost:3002',
   credentials: true
 }));
 app.use(express.json());

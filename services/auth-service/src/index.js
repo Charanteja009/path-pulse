@@ -7,10 +7,16 @@ const authRoutes = require('./routes/authRoutes');
 const app = express();
 
 // 1. MIDDLEWARE FIRST (The "Filter" Layer)
-app.use(cors({
-  origin: 'http://localhost:3000',
-  credentials: true
-}));
+// services/auth-service/src/index.js
+
+const corsOptions = {
+  origin: 'http://localhost:3002', 
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization']
+};
+
+app.use(cors(corsOptions));
 app.use(express.json()); // Needs to be before routes to parse the body!
 
 const PORT = process.env.AUTH_PORT || 3001;

@@ -12,7 +12,7 @@ export default function MyPathsGallery() {
     const fetchCollection = async () => {
       const userId = localStorage.getItem("pulse_userId");
       try {
-        const res = await fetch(`http://127.0.0.1:3002/api/roadmap/my-collection/${userId}`);
+        const res = await fetch(`http://localhost:5001/api/roadmap/my-collection/${userId}`);
         const data = await res.json();
         setCollection(data);
       } catch (err) {

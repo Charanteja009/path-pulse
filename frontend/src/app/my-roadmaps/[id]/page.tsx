@@ -11,7 +11,7 @@ export default function ExecutionView() {
   const [selectedIdx, setSelectedIdx] = useState<number | null>(0);
 
   useEffect(() => {
-    fetch(`http://127.0.0.1:3002/api/roadmap/single/${id}`)
+    fetch(`http://localhost:5001/api/roadmap/single/${id}`)
       .then(res => res.json())
       .then(result => {
         setData(result);
@@ -25,7 +25,7 @@ export default function ExecutionView() {
       : [...completedSteps, stepTitle];
     
     setCompletedSteps(newList);
-    fetch(`http://127.0.0.1:3002/api/roadmap/update-progress`, {
+    fetch(`http://localhost:5001/api/roadmap/update-progress`, {
       method: "PATCH",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ roadmap_id: id, completed_steps: newList })

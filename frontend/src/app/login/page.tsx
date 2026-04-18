@@ -5,7 +5,7 @@ import { Compass, Mail, Lock, ArrowRight, User, Loader2, ShieldCheck, AlertCircl
 import { useRouter } from 'next/navigation';
 
 // API Configuration - Pointing to your Nginx Gateway
-const GATEWAY_URL = "http://127.0.0.1:3001/api/auth";
+const GATEWAY_URL = "http://localhost:3001/api/auth/";
 
 export default function AuthPage() {
   const router = useRouter();

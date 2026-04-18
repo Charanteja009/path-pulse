@@ -31,7 +31,7 @@ export default function RepoExplainer() {
         }
 
         try {
-            const res = await fetch(`http://127.0.0.1:3003/api/repo/history/${userId}`);
+            const res = await fetch(`http://localhost:5002/api/repo/history/${userId}`);
             if (res.ok) {
                 const data = await res.json();
                 setChatHistory(Array.isArray(data) ? data : []);
@@ -48,7 +48,7 @@ export default function RepoExplainer() {
   setIsAnalyzing(true);
   
   try {
-    const res = await fetch(`http://127.0.0.1:3003/api/repo/analyze`, {
+    const res = await fetch(`http://localhost:5002/api/repo/analyze`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ 
@@ -83,7 +83,7 @@ export default function RepoExplainer() {
         setInput("");
 
         try {
-            const res = await fetch(`http://127.0.0.1:3003/api/repo/analyze`, {
+            const res = await fetch(`http://localhost:5002/api/repo/analyze`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
