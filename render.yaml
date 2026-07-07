@@ -1,0 +1,49 @@
+services:
+  - type: web
+    name: auth-service
+    env: node
+    plan: free
+    rootDir: services/auth-service
+    buildCommand: npm install
+    startCommand: node src/index.js
+    envVars:
+      - key: PORT
+        value: 3001
+      - key: DB_HOST
+        value: DB_HOST_VALUE
+      # Add other DB env vars here
+
+  - type: web
+    name: roadmap-service
+    env: node
+    plan: free
+    rootDir: services/roadmap-service
+    buildCommand: npm install
+    startCommand: node src/index.js
+    envVars:
+      - key: PORT
+        value: 3002
+      - key: MONGO_URI
+        value: MONGO_URI_VALUE
+
+  - type: web
+    name: repo-service
+    env: node
+    plan: free
+    rootDir: services/repo-service
+    buildCommand: npm install
+    startCommand: node src/index.js
+    envVars:
+      - key: PORT
+        value: 3003
+      - key: DB_HOST
+        value: DB_HOST_VALUE
+
+  - type: web
+    name: api-gateway
+    env: docker
+    plan: free
+    rootDir: api-gateway
+    envVars:
+      - key: PORT
+        value: 80
